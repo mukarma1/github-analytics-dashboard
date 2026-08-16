@@ -1,9 +1,9 @@
-# GitPulse — GitHub Audience Tracker
+# Github analytics — GitHub Audience Tracker
 
 
 ## About The Project
 
-GitPulse is a full-stack GitHub audience tracker built with FastAPI and MongoDB. On every sync it fetches your followers and following from the GitHub REST API, diffs them against the stored snapshot in MongoDB, and logs every change as a timestamped event. The event log is append-only so the full history is always preserved.
+Github-analytics is a full-stack GitHub audience tracker built with FastAPI and MongoDB. On every sync it fetches your followers and following from the GitHub REST API, diffs them against the stored snapshot in MongoDB, and logs every change as a timestamped event. The event log is append-only so the full history is always preserved.
 
 The dashboard has three views — current followers newest first, current following in GitHub order, and lost followers built from a MongoDB aggregation that deduplicates by user and excludes anyone who has re-followed. A daily cron job via GitHub Actions keeps everything up to date automatically.
 
@@ -18,7 +18,7 @@ The dashboard has three views — current followers newest first, current follow
 
 ## Getting Started
 
-This will help you understand how to set up GitPulse to track your own GitHub followers. To get a local copy up and running follow these simple steps.
+This will help you understand how to set up Github-analytics to track your own GitHub followers. To get a local copy up and running follow these simple steps.
 
 ## Installation Steps
 
@@ -28,7 +28,7 @@ This will help you understand how to set up GitPulse to track your own GitHub fo
 
    ```bash
    git clone https://github.com/mukarma1/GitPulse.git
-   cd GitPulse
+   cd Github-analytics
    ```
 
 2. **Create a Virtual Environment**
@@ -78,7 +78,7 @@ This will help you understand how to set up GitPulse to track your own GitHub fo
 
 ## API Key Setup
 
-GitPulse needs two credentials to run — a GitHub token and a MongoDB connection string.
+Github-analytics needs two credentials to run — a GitHub token and a MongoDB connection string.
 
 ### 1. GitHub Personal Access Token (`GITHUB_TOKEN`)
 
@@ -88,7 +88,7 @@ This is required. Without it, GitHub blocks the following list endpoint entirely
 
 1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
 2. Click **Generate new token (classic)**
-3. Set a name like `gitpulse` and choose an expiration
+3. Set a name like `github-analytics` and choose an expiration
 4. Select the following scope:
    - `read:user` — to read your profile and your own following list
 5. Click **Generate token** and copy it immediately — you cannot see it again
@@ -102,7 +102,7 @@ GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ### 2. MongoDB Connection URI (`MONGODB_URI`)
 
-GitPulse stores all follower snapshots and event history in MongoDB.
+Github-analytics stores all follower snapshots and event history in MongoDB.
 
 **For local development**, a local MongoDB instance works:
 ```dotenv
