@@ -131,44 +131,5 @@ DB_NAME=github_analytics
 SYNC_INTERVAL_MINUTES=60
 ```
 
-## Deployment
-
-### Backend → Render
-
-1. Go to [render.com](https://render.com) → **New +** → **Web Service** → connect your repo
-2. Fill in the form:
-
-   | Field | Value |
-   |-------|-------|
-   | Runtime | Python 3 |
-   | Build Command | `pip install -r backend/requirements.txt` |
-   | Start Command | `cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
-   | Instance Type | Free |
-
-3. Add environment variables: `GITHUB_TOKEN`, `GITHUB_USERNAME`, `MONGODB_URI`, `DB_NAME`
-4. Deploy — copy the URL you receive (e.g. `https://gitpulse-api.onrender.com`)
-
-### Frontend → Vercel
-
-1. Open `frontend/js/config.js` and set your Render URL:
-   ```js
-   window.API_BASE = 'https://gitpulse-api.onrender.com'
-   ```
-2. Push the change to GitHub
-3. Go to [vercel.com](https://vercel.com) → **New Project** → import your repo → **Deploy**
-
-### Nightly Sync → GitHub Actions
-
-The workflow at `.github/workflows/auto_sync.yml` syncs at **11:45 PM IST** daily. It imports the backend Python code directly and talks to MongoDB Atlas — the Render server does not need to be awake.
-
-Go to your repo → **Settings** → **Secrets and variables** → **Actions** → add:
-
-| Secret Name | Value |
-|-------------|-------|
-| `GH_ANALYTICS_TOKEN` | Your GitHub personal access token |
-| `GH_USERNAME` | Your GitHub username |
-| `MONGODB_URI` | Your MongoDB Atlas URI |
-| `DB_NAME` | `github_analytics` |
-
-> Use `GH_ANALYTICS_TOKEN` — not `GITHUB_TOKEN`, which is reserved by GitHub Actions itself.
-
+ Auther: Mukarma Rehman 
+ github:https://github.com/mukarma1
